@@ -1,5 +1,6 @@
 import { type ChangeEvent, useCallback, useMemo, useState } from 'react';
 import ChildArea from '@/components/ChildArea';
+import TailwindStyle from '@/components/TailwindStyle';
 
 export default function App() {
   const [count, setCount] = useState<number>(0);
@@ -40,6 +41,9 @@ export default function App() {
             <ChildArea isOpen={isOpen} buttonText={buttonText} onClick={handleIsOpenClick} />
           </div>
         </div>
+      </div>
+      <div>
+        <TailwindStyle />
       </div>
     </div>
   );
