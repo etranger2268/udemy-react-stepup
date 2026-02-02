@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from 'react';
+import { type ChangeEvent, useCallback, useState } from 'react';
 import ChildArea from '@/components/ChildArea';
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
 
   const handleCountClick = () => setCount((prev) => prev + 1);
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value);
-  const handleIsOpenClick = () => setIsOpen((prev) => !prev);
+  const handleIsOpenClick = useCallback(() => setIsOpen((prev) => !prev), []);
 
   console.log('- App -');
 
@@ -37,14 +37,7 @@ export default function App() {
             className="border py-1 px-3 text-sm rounded-md focus:outline-none focus:ring focus:ring-blue-500"
           />
           <div>
-            <button
-              type="button"
-              onClick={handleIsOpenClick}
-              className="w-20 py-2 px-4 border text-sm rounded bg-red-500 text-white font-semibold transition-colors duration-300 hover:opacity-75"
-            >
-              {buttonText}
-            </button>
-            <ChildArea isOpen={isOpen} />
+            <ChildArea isOpen={isOpen} buttonText={buttonText} onClick={handleIsOpenClick} />
           </div>
         </div>
       </div>
