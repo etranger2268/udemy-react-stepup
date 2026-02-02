@@ -1,11 +1,11 @@
-import { type ChangeEvent, useCallback, useState } from 'react';
+import { type ChangeEvent, useCallback, useMemo, useState } from 'react';
 import ChildArea from '@/components/ChildArea';
 
 export default function App() {
   const [count, setCount] = useState<number>(0);
   const [value, setValue] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const buttonText = isOpen ? '非表示' : '表示';
+  const buttonText = useMemo(() => (isOpen ? '非表示' : '表示'), [isOpen]);
 
   const handleCountClick = () => setCount((prev) => prev + 1);
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value);
