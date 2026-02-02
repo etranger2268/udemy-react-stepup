@@ -6,6 +6,7 @@ type ChildAreaProps = {
 
 const ChildArea = ({ isOpen }: ChildAreaProps) => {
   console.log('--- ChildArea ---');
+  console.log([...Array(1000).keys()]);
   return (
     <Fragment>
       {isOpen ? (
