@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import Button from '@/components/atom/button/Button';
 import SearchInput from '@/components/molecule/SearchInput';
 import UserCard from '@/components/organism/user/UserCard';
+import DefaultLayout from '@/components/template/DefaultLayout';
+import HeaderOnlyLayout from '@/components/template/HeaderOnlyLayout';
 
 const user = {
   image: '/victor-g-N04FIfHhv_k-unsplash.jpg',
@@ -14,6 +17,34 @@ const user = {
 };
 
 const Section05 = () => {
+  const [path, setPath] = useState<'TOP' | 'USERS'>('TOP');
+  const handleSetPath = (nextPath: 'TOP' | 'USERS') => {
+    if (path === nextPath) {
+      return;
+    }
+    setPath(nextPath);
+  };
+
+  if (path === 'TOP') {
+    return (
+      <DefaultLayout onClick={handleSetPath}>
+        <Section05Content />
+      </DefaultLayout>
+    );
+  }
+
+  if (path === 'USERS') {
+    return (
+      <HeaderOnlyLayout onClick={handleSetPath}>
+        <Section05Content />
+      </HeaderOnlyLayout>
+    );
+  }
+
+  return <p>pathが不適切です。</p>;
+};
+
+function Section05Content() {
   return (
     <main className="space-y-4">
       <div className="flex flex-col gap-2 border rounded py-2">
@@ -34,6 +65,6 @@ const Section05 = () => {
       </div>
     </main>
   );
-};
+}
 
 export default Section05;
