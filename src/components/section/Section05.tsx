@@ -1,5 +1,6 @@
 import Button from '@/components/atom/button/Button';
 import SearchInput from '@/components/molecule/SearchInput';
+import UserCard from '@/components/organism/user/UserCard';
 
 const Section05 = () => {
   return (
@@ -15,6 +16,10 @@ const Section05 = () => {
       <div className="border rounded p-2">
         <h2 className="text-lg font-bold text-gray-800">molecule</h2>
         <SearchInput />
+      </div>
+      <div className="border rounded p-2">
+        <h2 className="text-lg font-bold text-gray-800">organism</h2>
+        <UserCard />
       </div>
     </main>
   );
