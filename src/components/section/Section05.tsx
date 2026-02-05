@@ -18,8 +18,9 @@ const users = [...Array(10).keys()].map((key) => ({
 }));
 
 const Section05 = () => {
-  const [path, setPath] = useState<'TOP' | 'USERS'>('TOP');
-  const handleSetPath = (nextPath: 'TOP' | 'USERS') => {
+  const [path, setPath] = useState<'TOP' | 'USERS' | 'ADMIN'>('TOP');
+  const isAdmin = path === 'ADMIN';
+  const handleSetPath = (nextPath: 'TOP' | 'USERS' | 'ADMIN') => {
     if (path === nextPath) {
       return;
     }
@@ -37,13 +38,13 @@ const Section05 = () => {
     );
   }
 
-  if (path === 'USERS') {
+  if (path === 'USERS' || path === 'ADMIN') {
     return (
       <HeaderOnlyLayout onClick={handleSetPath}>
         <div className="mb-2">
           <h1 className="text-xl font-bold">ユーザー一覧</h1>
         </div>
-        <Section05Content />
+        <Section05Content isAdmin={isAdmin} />
       </HeaderOnlyLayout>
     );
   }
@@ -51,7 +52,11 @@ const Section05 = () => {
   return <p>pathが不適切です。</p>;
 };
 
-function Section05Content() {
+type Section05ContentProps = {
+  isAdmin?: boolean;
+};
+
+function Section05Content({ isAdmin }: Section05ContentProps) {
   return (
     <main className="space-y-4">
       <div className="flex flex-col gap-2 border rounded py-2">
@@ -70,7 +75,7 @@ function Section05Content() {
         <h2 className="text-lg font-bold text-gray-800">organism</h2>
         <div className="grid grid-cols-2 gap-4">
           {users.map((user) => (
-            <UserCard key={user.key} user={user} />
+            <UserCard key={user.key} user={user} isAdmin={isAdmin} />
           ))}
         </div>
       </div>

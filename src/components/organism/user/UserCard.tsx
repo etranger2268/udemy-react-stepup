@@ -12,13 +12,17 @@ type UserCardProps = {
     };
     website: string;
   };
+  isAdmin?: boolean;
 };
 
-const UserCard = ({ user: { image, name, email, tel, company, website } }: UserCardProps) => {
+const UserCard = ({
+  user: { image, name, email, tel, company, website },
+  isAdmin,
+}: UserCardProps) => {
   return (
     <Card>
       <div className="mb-2">
-        <UserIconWithName image={image} name={name} />
+        <UserIconWithName image={image} name={name} isAdmin={isAdmin} />
       </div>
       <div className="text-sm font-medium text-gray-600">
         <ul className="flex flex-col items-start">

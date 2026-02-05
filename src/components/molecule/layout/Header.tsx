@@ -1,5 +1,5 @@
 type HeaderProps = {
-  onClick: (nextPath: 'TOP' | 'USERS') => void;
+  onClick: (nextPath: 'TOP' | 'USERS' | 'ADMIN') => void;
 };
 
 const Header = ({ onClick }: HeaderProps) => {
@@ -18,6 +18,13 @@ const Header = ({ onClick }: HeaderProps) => {
         className="hover:text-blue-800 hover:cursor-pointer"
       >
         USERS
+      </button>
+      <button
+        type="button"
+        onClick={() => onClick('ADMIN')}
+        className="hover:text-blue-800 hover:cursor-pointer"
+      >
+        ADMIN
       </button>
     </header>
   );

@@ -1,7 +1,7 @@
 import Header from '@/components/molecule/layout/Header';
 
 type HeaderOnlyLayoutProps = {
-  onClick: (nextPath: 'TOP' | 'USERS') => void;
+  onClick: (nextPath: 'TOP' | 'USERS' | 'ADMIN') => void;
 
   children: React.ReactNode;
 };
