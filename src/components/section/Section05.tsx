@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from '@/components/atom/button/Button';
 import SearchInput from '@/components/molecule/SearchInput';
 import UserCard from '@/components/organism/user/UserCard';
 import UserCardContext from '@/components/organism/user/UserCardContext';
 import DefaultLayout from '@/components/template/DefaultLayout';
 import HeaderOnlyLayout from '@/components/template/HeaderOnlyLayout';
-import { AdminProvider } from '@/hooks/useAdmin';
+import { AdminContext, AdminProvider } from '@/hooks/useAdmin';
 
 const users = [...Array(10).keys()].map((key) => ({
   key,
@@ -98,6 +98,12 @@ function Section05Content({ isAdmin }: Section05ContentProps) {
 }
 
 function Section05ContentContext() {
+  const admin = useContext(AdminContext);
+
+  if (admin === undefined) {
+    throw new Error('unexpected error');
+  }
+
   return (
     <main className="space-y-4">
       <div className="flex flex-col gap-2 border rounded py-2">
@@ -112,8 +118,15 @@ function Section05ContentContext() {
         <h2 className="text-lg font-bold text-gray-800">molecule</h2>
         <SearchInput />
       </div>
-      <div className="border rounded p-2">
+      <div className="border rounded p-2 space-y-2">
         <h2 className="text-lg font-bold text-gray-800">organism</h2>
+        <button
+          type="button"
+          onClick={admin.toggleIsAdminContext}
+          className="w-40 py-2 px-4 text-sm font-semibold bg-green-500 text-white rounded-md transition-all duration-300 hover:opacity-75"
+        >
+          {admin.isAdminContext ? 'you are admin' : 'you are not admin'}
+        </button>
         <div className="grid grid-cols-2 gap-4">
           {users.map((user) => (
             <UserCardContext key={user.key} user={user} />

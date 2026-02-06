@@ -9,7 +9,7 @@ type UserIconWithName = {
 const UserIconWithNameContext = ({ image, name }: UserIconWithName) => {
   const admin = useContext(AdminContext);
 
-  if (!admin?.isAdminContext) {
+  if (admin === undefined) {
     throw new Error('unexpecterd error');
   }
 

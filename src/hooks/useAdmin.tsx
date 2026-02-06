@@ -1,11 +1,12 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 
-type Admin = { isAdminContext: boolean } | undefined;
+type Admin = { isAdminContext: boolean; toggleIsAdminContext: () => void } | undefined;
 type AdminProviderProps = Readonly<{ children: React.ReactNode }>;
 
 export const AdminContext = createContext<Admin>(undefined);
 
 export const AdminProvider = ({ children }: AdminProviderProps) => {
-  const isAdminContext = true;
-  return <AdminContext value={{ isAdminContext }}>{children}</AdminContext>;
+  const [isAdminContext, setIsAdminContext] = useState(true);
+  const toggleIsAdminContext = () => setIsAdminContext((prev) => !prev);
+  return <AdminContext value={{ isAdminContext, toggleIsAdminContext }}>{children}</AdminContext>;
 };
