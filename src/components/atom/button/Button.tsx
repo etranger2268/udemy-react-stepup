@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
 type ButtonProps = {
   variant: 'primary' | 'secondly' | 'default';
   children: React.ReactNode;
 };
 
-const Button = ({ variant, children }: ButtonProps) => {
+const Button = memo(({ variant, children }: ButtonProps) => {
   const color =
     variant === 'primary'
       ? 'bg-blue-500 text-white'
@@ -20,6 +22,6 @@ const Button = ({ variant, children }: ButtonProps) => {
       {children}
     </button>
   );
-};
+});
 
 export default Button;

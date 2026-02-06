@@ -1,8 +1,10 @@
+import { memo } from 'react';
+
 type HeaderProps = {
   onClick: (nextPath: 'TOP' | 'USERS' | 'ADMIN' | 'ADMIN_CONTEXT') => void;
 };
 
-const Header = ({ onClick }: HeaderProps) => {
+const Header = memo(({ onClick }: HeaderProps) => {
   return (
     <header className="flex justify-center items-center gap-4 text-blue-500 mb-4">
       <button
@@ -35,6 +37,6 @@ const Header = ({ onClick }: HeaderProps) => {
       </button>
     </header>
   );
-};
+});
 
 export default Header;

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { memo, useContext } from 'react';
 import { AdminContext } from '@/hooks/useAdmin';
 
 type UserIconWithName = {
@@ -6,7 +6,7 @@ type UserIconWithName = {
   name: string;
 };
 
-const UserIconWithNameContext = ({ image, name }: UserIconWithName) => {
+const UserIconWithNameContext = memo(({ image, name }: UserIconWithName) => {
   const admin = useContext(AdminContext);
 
   if (admin === undefined) {
@@ -30,6 +30,6 @@ const UserIconWithNameContext = ({ image, name }: UserIconWithName) => {
       </div>
     </>
   );
-};
+});
 
 export default UserIconWithNameContext;

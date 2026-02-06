@@ -1,8 +1,10 @@
+import { memo } from 'react';
+
 type InputProps = {
   placeholder?: string;
 };
 
-const Input = ({ placeholder = 'input...' }: InputProps) => {
+const Input = memo(({ placeholder = 'input...' }: InputProps) => {
   return (
     <div className="flex-1">
       <input
@@ -12,6 +14,6 @@ const Input = ({ placeholder = 'input...' }: InputProps) => {
       />
     </div>
   );
-};
+});
 
 export default Input;
