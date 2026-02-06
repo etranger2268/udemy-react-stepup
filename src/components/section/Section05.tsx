@@ -2,8 +2,10 @@ import { useState } from 'react';
 import Button from '@/components/atom/button/Button';
 import SearchInput from '@/components/molecule/SearchInput';
 import UserCard from '@/components/organism/user/UserCard';
+import UserCardContext from '@/components/organism/user/UserCardContext';
 import DefaultLayout from '@/components/template/DefaultLayout';
 import HeaderOnlyLayout from '@/components/template/HeaderOnlyLayout';
+import { AdminProvider } from '@/hooks/useAdmin';
 
 const users = [...Array(10).keys()].map((key) => ({
   key,
@@ -18,9 +20,9 @@ const users = [...Array(10).keys()].map((key) => ({
 }));
 
 const Section05 = () => {
-  const [path, setPath] = useState<'TOP' | 'USERS' | 'ADMIN'>('TOP');
+  const [path, setPath] = useState<'TOP' | 'USERS' | 'ADMIN' | 'ADMIN_CONTEXT'>('TOP');
   const isAdmin = path === 'ADMIN';
-  const handleSetPath = (nextPath: 'TOP' | 'USERS' | 'ADMIN') => {
+  const handleSetPath = (nextPath: 'TOP' | 'USERS' | 'ADMIN' | 'ADMIN_CONTEXT') => {
     if (path === nextPath) {
       return;
     }
@@ -33,7 +35,6 @@ const Section05 = () => {
         <div className="mb-2">
           <h1 className="text-xl font-bold">TOPページ</h1>
         </div>
-        {/* <Section05Content /> */}
       </DefaultLayout>
     );
   }
@@ -46,6 +47,19 @@ const Section05 = () => {
         </div>
         <Section05Content isAdmin={isAdmin} />
       </HeaderOnlyLayout>
+    );
+  }
+
+  if (path === 'ADMIN_CONTEXT') {
+    return (
+      <AdminProvider>
+        <HeaderOnlyLayout onClick={handleSetPath}>
+          <div className="mb-2">
+            <h1 className="text-xl font-bold">ユーザー一覧</h1>
+          </div>
+          <Section05ContentContext />
+        </HeaderOnlyLayout>
+      </AdminProvider>
     );
   }
 
@@ -76,6 +90,33 @@ function Section05Content({ isAdmin }: Section05ContentProps) {
         <div className="grid grid-cols-2 gap-4">
           {users.map((user) => (
             <UserCard key={user.key} user={user} isAdmin={isAdmin} />
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function Section05ContentContext() {
+  return (
+    <main className="space-y-4">
+      <div className="flex flex-col gap-2 border rounded py-2">
+        <h2 className="text-lg font-bold text-gray-800">atom</h2>
+        <div className="flex gap-3 justify-center">
+          <Button variant="primary">primary</Button>
+          <Button variant="secondly">secondly</Button>
+          <Button variant="default">default</Button>
+        </div>
+      </div>
+      <div className="border rounded p-2">
+        <h2 className="text-lg font-bold text-gray-800">molecule</h2>
+        <SearchInput />
+      </div>
+      <div className="border rounded p-2">
+        <h2 className="text-lg font-bold text-gray-800">organism</h2>
+        <div className="grid grid-cols-2 gap-4">
+          {users.map((user) => (
+            <UserCardContext key={user.key} user={user} />
           ))}
         </div>
       </div>
