@@ -1,30 +1,8 @@
-import { useState } from 'react';
 import UserCard from '@/components/UserCard';
-import type { UserProfileType, UserType } from '@/types/userProfile';
+import { useAllUsers } from '@/hooks/useAllUsers';
 
 const Section11 = () => {
-  const [userProfiles, setUserProfiles] = useState<UserProfileType[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
-
-  const fetchUserProfile = async () => {
-    setIsLoading(true);
-    setError('');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    if (!res.ok) {
-      setError('UserProfile fetch Error');
-    }
-    const data: UserProfileType[] = (await res.json()).map((user: UserType) => ({
-      id: user.id,
-      name: `${user.name} (${user.username})`,
-      email: user.email,
-      address: `${user.address.city}${user.address.suite}${user.address.street}`,
-    }));
-
-    setUserProfiles(data);
-    setIsLoading(false);
-  };
+  const { userProfiles, isLoading, error, fetchUserProfile } = useAllUsers();
 
   return (
     <div className="space-y-2">
