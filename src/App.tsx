@@ -6,7 +6,7 @@ import Section10 from '@/components/section/Section10';
 
 export default function App() {
   return (
-    <div className="flex flex-col justify-center pt-6 gap-4 max-w-lg mx-auto text-center">
+    <div className="flex flex-col justify-center pt-6 gap-4 max-w-3xl mx-auto text-center">
       {/* <Section03 /> */}
       {/* <Section04 /> */}
       {/* <Section05 /> */}
