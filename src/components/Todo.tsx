@@ -1,5 +1,8 @@
 import type { TodoType } from '@/types/todo';
 
+// type TodoPickType = Pick<TodoType, 'userId' | 'title' | 'completed'>;
+// type TodoOmitType = Omit<TodoType, 'id'>;
+
 const Todo = ({ todo }: { todo: TodoType }) => {
   const mark = todo.completed ? '✓' : '☐';
   const index = String(todo.id).padStart(3, '0');
