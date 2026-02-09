@@ -9,7 +9,7 @@ const Section10 = () => {
     if (!res.ok) {
       throw new Error('Todos fetch Error');
     }
-    const data = await res.json();
+    const data: TodoType[] = await res.json();
     setTodos(data);
   };
 
