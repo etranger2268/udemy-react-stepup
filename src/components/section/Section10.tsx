@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Todo from '@/components/Todo';
+import User from '@/components/User';
 import type { TodoType } from '@/types/todo';
 
 const Section10 = () => {
@@ -15,6 +16,9 @@ const Section10 = () => {
 
   return (
     <div className="space-y-4">
+      <div className="text-left">
+        <User user={{ name: 'etranger2268', hobbies: ['music', 'running', 'reading'] }} />
+      </div>
       <div>
         <button
           type="button"
