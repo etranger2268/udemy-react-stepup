@@ -22,7 +22,7 @@ const Section12 = () => {
         <Header />
       </div>
       <div className="flex-1">
-        <div className="bg-slate-50 h-full">
+        <div className="bg-slate-50 flex-1 h-full">
           <PageComponent />
         </div>
       </div>
