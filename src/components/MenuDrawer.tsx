@@ -16,6 +16,13 @@ const MenuDrawer = ({ toggle, isOpen, handleClickPath, changePath }: MenuDrawerP
       <Drawer isOpen={isOpen} onClose={toggle}>
         <button
           type="button"
+          onClick={() => handleClickPath('/home', true)}
+          className="block w-full text-left py-2 px-4 text-sm font-medium transition-all duration-300 hover:bg-slate-100 hover:opacity-75"
+        >
+          HOME
+        </button>
+        <button
+          type="button"
           onClick={() => handleClickPath('/user-management', true)}
           className="block w-full text-left py-2 px-4 text-sm font-medium transition-all duration-300 hover:bg-slate-100 hover:opacity-75"
         >

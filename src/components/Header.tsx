@@ -20,7 +20,7 @@ const Header = memo(() => {
       <nav className="p-3 md:p-6 flex w-full items-center justify-between">
         <button
           type="button"
-          onClick={() => handleClickPath('/')}
+          onClick={() => handleClickPath('/home')}
           className="text-base md:text-lg font-semibold transition-all duration-300 hover:opacity-75"
         >
           ユーザー管理アプリ
