@@ -1,6 +1,6 @@
 'use server';
 
-type State = {
+export type State = {
   error?: string;
   success: boolean;
 };

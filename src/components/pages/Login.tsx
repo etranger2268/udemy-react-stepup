@@ -1,20 +1,8 @@
-import { type ChangeEvent, memo, useActionState, useEffect, useState } from 'react';
-import { authAction } from '@/action/authAction';
-import { usePath } from '@/hooks/usePath';
+import { memo } from 'react';
+import { useAuth } from '@/hooks/useAuth';
 
 const Login = memo(() => {
-  const { changePath } = usePath();
-  const [userId, setUserId] = useState('');
-
-  const handleChangeUserId = (e: ChangeEvent<HTMLInputElement>) => setUserId(e.currentTarget.value);
-
-  const [state, formAction, loading] = useActionState(authAction, { error: '', success: false });
-
-  useEffect(() => {
-    if (state?.success) {
-      changePath('/home');
-    }
-  }, [state, changePath]);
+  const { userId, handleChangeUserId, formAction, state, loading } = useAuth();
 
   return (
     <div className="flex justify-center items-center h-full">

@@ -4,6 +4,8 @@
 // import Section08 from '@/components/section/Section08';
 // import Section10 from '@/components/section/Section10';
 // import Section11 from '@/components/section/Section11';
+
+import { Toaster } from 'sonner';
 import Section12 from '@/components/section/Section12';
 import { PathProvider } from '@/hooks/usePath';
 
@@ -20,6 +22,7 @@ export default function App() {
       {/* </div> */}
       <div>
         <PathProvider>
+          <Toaster position="top-center" richColors />
           <Section12 />
         </PathProvider>
       </div>
