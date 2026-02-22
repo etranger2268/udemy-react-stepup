@@ -1,6 +1,7 @@
 import { type ChangeEvent, useActionState, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { authAction, type State } from '@/action/authAction';
+import { useLoginUser } from '@/hooks/useLoginUser';
 import { usePath } from '@/hooks/usePath';
 
 type UseAuthReturn = {
@@ -12,20 +13,22 @@ type UseAuthReturn = {
 };
 
 export const useAuth = (): UseAuthReturn => {
+  const { setLoginUser } = useLoginUser();
   const { changePath } = usePath();
   const [userId, setUserId] = useState('');
 
   const handleChangeUserId = (e: ChangeEvent<HTMLInputElement>) => setUserId(e.currentTarget.value);
 
-  const [state, formAction, loading] = useActionState(authAction, { success: false });
+  const [state, formAction, loading] = useActionState(authAction, { success: false, data: null });
 
   useEffect(() => {
     if (state?.success) {
+      setLoginUser(state.data ?? null);
       toast.success('ログインに成功しました');
 
       changePath('/home');
     }
-  }, [state?.success, changePath]);
+  }, [state, setLoginUser, changePath]);
 
   return { userId, handleChangeUserId, formAction, state, loading };
 };
