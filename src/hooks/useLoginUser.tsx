@@ -9,7 +9,10 @@ import {
 import type { User2 } from '@/types/user2';
 
 type LoginUser =
-  | { loginUser: User2 | null; setLoginUser: Dispatch<SetStateAction<User2 | null>> }
+  | {
+      loginUser: (User2 & { isAdmin?: boolean }) | null;
+      setLoginUser: Dispatch<SetStateAction<User2 | null>>;
+    }
   | undefined;
 
 const LoginUserContext = createContext<LoginUser>(undefined);

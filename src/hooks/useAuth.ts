@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { authAction, type State } from '@/action/authAction';
 import { useLoginUser } from '@/hooks/useLoginUser';
 import { usePath } from '@/hooks/usePath';
+import type { User2 } from '@/types/user2';
 
 type UseAuthReturn = {
   userId: string;
@@ -22,8 +23,12 @@ export const useAuth = (): UseAuthReturn => {
   const [state, formAction, loading] = useActionState(authAction, { success: false, data: null });
 
   useEffect(() => {
-    if (state?.success) {
-      setLoginUser(state.data ?? null);
+    if (state?.success && state.data) {
+      const loginData: User2 = {
+        ...state.data,
+        isAdmin: String(state.data.id) === '10',
+      };
+      setLoginUser(loginData);
       toast.success('ログインに成功しました');
 
       changePath('/home');
