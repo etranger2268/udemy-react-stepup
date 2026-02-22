@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useLoginUser } from '@/hooks/useLoginUser';
 import type { User2 } from '@/types/user2';
 
 interface UserCardModalProps {
@@ -6,6 +8,12 @@ interface UserCardModalProps {
 }
 
 const UserCardModal = ({ user, onClose }: UserCardModalProps) => {
+  const { loginUser } = useLoginUser();
+  const [name, setName] = useState<string>(user.name);
+  const [username, setUsername] = useState<string>(user.username);
+  const [email, setEmail] = useState<string>(user.email);
+  const [phone, setPhone] = useState<string>(user.phone);
+  const isAdmin = loginUser?.isAdmin ?? false;
   return (
     <div className="m-6 space-y-4">
       <div className="flex justify-between items-center">
@@ -27,8 +35,10 @@ const UserCardModal = ({ user, onClose }: UserCardModalProps) => {
             <input
               id="name"
               type="text"
+              readOnly={!isAdmin}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.currentTarget.value)}
               className="border rounded-md py-1 px-3 text-sm font-medium bg-transparent focus:outline-none focus:ring focus:ring-blue-500"
-              value={user.name}
+              value={name}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -38,8 +48,12 @@ const UserCardModal = ({ user, onClose }: UserCardModalProps) => {
             <input
               id="username"
               type="text"
+              readOnly={!isAdmin}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setUsername(e.currentTarget.value)
+              }
               className="border rounded-md py-1 px-3 text-sm font-medium bg-transparent focus:outline-none focus:ring focus:ring-blue-500"
-              value={user.username}
+              value={username}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -49,8 +63,10 @@ const UserCardModal = ({ user, onClose }: UserCardModalProps) => {
             <input
               id="email"
               type="email"
+              readOnly={!isAdmin}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value)}
               className="border rounded-md py-1 px-3 text-sm font-medium bg-transparent focus:outline-none focus:ring focus:ring-blue-500"
-              value={user.email}
+              value={email}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -60,10 +76,22 @@ const UserCardModal = ({ user, onClose }: UserCardModalProps) => {
             <input
               id="tel"
               type="text"
+              readOnly={!isAdmin}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.currentTarget.value)}
               className="border rounded-md py-1 px-3 text-sm font-medium bg-transparent focus:outline-none focus:ring focus:ring-blue-500"
-              value={user.phone}
+              value={phone}
             />
           </div>
+          {isAdmin && (
+            <div className="flex justify-center">
+              <button
+                type="button"
+                className="bg-blue-500 text-white text-sm font-medium py-1 px-3 rounded-md transition-opacity duration-300 hover:opacity-75"
+              >
+                Edit
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
